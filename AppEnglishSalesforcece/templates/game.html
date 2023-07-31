@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman Game</title>
+</head>
+<body>
+    <h1>Hangman Game</h1>
+    <div id="hangman-container">
+        <!-- Dibujo del ahorcado -->
+    </div>
+    <div id="word-container">
+        <!-- Espacios para las letras de la palabra a adivinar -->
+    </div>
+    <div id="guess-container">
+        <!-- Espacios para las letras adivinadas -->
+    </div>
+    <div id="letters-container">
+        <!-- Botones para cada letra -->
+        <button class="letter-btn" onclick="handleGuess('A')">A</button>
+        <button class="letter-btn" onclick="handleGuess('B')">B</button>
+        <button class="letter-btn" onclick="handleGuess('C')">C</button>
+        <button class="letter-btn" onclick="handleGuess('D')">D</button>
+        <button class="letter-btn" onclick="handleGuess('E')">E</button>
+        <button class="letter-btn" onclick="handleGuess('F')">F</button>
+        <button class="letter-btn" onclick="handleGuess('G')">G</button>
+        <button class="letter-btn" onclick="handleGuess('H')">H</button>
+        <button class="letter-btn" onclick="handleGuess('I')">I</button>
+        <button class="letter-btn" onclick="handleGuess('J')">J</button>
+        <button class="letter-btn" onclick="handleGuess('K')">K</button>
+        <button class="letter-btn" onclick="handleGuess('L')">L</button>
+        <button class="letter-btn" onclick="handleGuess('M')">M</button>
+        <button class="letter-btn" onclick="handleGuess('N')">N</button>
+        <button class="letter-btn" onclick="handleGuess('O')">O</button>
+        <button class="letter-btn" onclick="handleGuess('P')">P</button>
+        <button class="letter-btn" onclick="handleGuess('Q')">Q</button>
+        <button class="letter-btn" onclick="handleGuess('R')">R</button>
+        <button class="letter-btn" onclick="handleGuess('S')">S</button>
+        <button class="letter-btn" onclick="handleGuess('T')">T</button>
+        <button class="letter-btn" onclick="handleGuess('U')">U</button>
+        <button class="letter-btn" onclick="handleGuess('V')">V</button>
+        <button class="letter-btn" onclick="handleGuess('W')">W</button>
+        <button class="letter-btn" onclick="handleGuess('X')">X</button>
+        <button class="letter-btn" onclick="handleGuess('Y')">Y</button>
+        <button class="letter-btn" onclick="handleGuess('Z')">Z</button>
+       
+    </div>
+    <div id="attempts-container">
+        <!-- Contador de intentos -->
+    </div>
+
+
+    <script>
+      const words = ['test', 'test', 'test', 'test'];
+
+      let wordToGuess = '';
+      let guessedLetters = [];
+      let attempts = 0;
+      const maxAttempts = 6;
+      const hangmanImages = [
+          'https://i.imgur.com/IBzkDxF.png',
+          'https://i.imgur.com/g3U7jpS.png',
+          'https://i.imgur.com/74OHhor.png',
+          'https://i.imgur.com/i55DIsx.png',
+          'https://i.imgur.com/Rk4vyUl.png',
+          'https://i.imgur.com/4phs9xf.png'
+      ];
+
+      const winImage = 'https://i.imgur.com/Ad1xXbC.png'; // Nueva imagen para mostrar en caso de ganar
+
+      function startGame() {
+          wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
+          guessedLetters = [];
+          attempts = 0;
+          updateWordContainer();
+          updateGuessContainer();
+          updateAttemptsContainer();
+          updateHangmanImage();
+      }
+
+      function updateWordContainer() {
+          const wordContainer = document.getElementById('word-container');
+          wordContainer.innerHTML = wordToGuess
+              .split('')
+              .map(letter => guessedLetters.includes(letter) ? letter : '_')
+              .join(' ');
+      }
+
+      function updateGuessContainer() {
+          const guessContainer = document.getElementById('guess-container');
+          guessContainer.textContent = `Guessed letters: ${guessedLetters.join(', ')}`;
+      }
+
+      function updateAttemptsContainer() {
+          const attemptsContainer = document.getElementById('attempts-container');
+          attemptsContainer.textContent = `Attempts: ${attempts}/${maxAttempts}`;
+      }
+
+      function updateHangmanImage() {
+          const hangmanContainer = document.getElementById('hangman-container');
+          const hangmanImage = document.createElement('img');
+          hangmanImage.src = hangmanImages[attempts]; // Ruta de la imagen según el número de intentos
+          hangmanImage.alt = 'Hangman';
+          hangmanContainer.innerHTML = ''; // Limpia el contenedor antes de agregar la imagen
+          hangmanContainer.appendChild(hangmanImage);
+      }
+
+      function checkWinCondition() {
+          for (const letter of wordToGuess) {
+              if (!guessedLetters.includes(letter)) {
+                  return false;
+              }
+          }
+          return true;
+      }
+
+      function handleGuess(letter) {
+          if (!guessedLetters.includes(letter)) {
+              guessedLetters.push(letter);
+              if (!wordToGuess.includes(letter)) {
+                  attempts++;
+              }
+              updateWordContainer();
+              updateGuessContainer();
+              updateAttemptsContainer();
+              updateHangmanImage();
+
+              if (checkWinCondition()) {
+                  const hangmanContainer = document.getElementById('hangman-container');
+                  const hangmanImage = document.createElement('img');
+                  hangmanImage.src = winImage;
+                  hangmanImage.alt = 'Hangman';
+                  hangmanContainer.innerHTML = '';
+                  hangmanContainer.appendChild(hangmanImage);
+
+                  // Mostrar la imagen de victoria antes de la alerta
+                  setTimeout(() => {
+                      alert('Congratulations! You guessed the word: ' + wordToGuess);
+                      startGame();
+                  }, 500);
+              } else if (attempts === maxAttempts) {
+                  alert('You reached the maximum number of attempts! The word was: ' + wordToGuess);
+                  startGame();
+              }
+          }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+          startGame();
+      });
+  </script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

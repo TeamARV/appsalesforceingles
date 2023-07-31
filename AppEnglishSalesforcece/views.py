@@ -5,6 +5,12 @@ from django.shortcuts import get_object_or_404
 
 from django.http.response import HttpResponse
 
+from simple_salesforce import Salesforce
+from requests.auth import HTTPBasicAuth
+import requests
+import json
+
+
 
 # Create your views here.
 
@@ -13,10 +19,8 @@ def index(request):
     return render(request, 'index.html')
 
 
-from simple_salesforce import Salesforce
-from requests.auth import HTTPBasicAuth
-import requests
-import json
+def game(request):
+    return render(request, 'game.html')
 
 
 

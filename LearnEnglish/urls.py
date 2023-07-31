@@ -10,6 +10,7 @@ from AppEnglishSalesforcece import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index ),
-    path('hi', views.testf1)
+    path('hi', views.testf1),
+    path('game', views.game)
 
 ]
