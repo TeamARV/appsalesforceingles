@@ -4,6 +4,9 @@
     <title>Hangman Game</title>
 </head>
 <body>
+
+    <di>debug -></di>{{ response}} <br>
+    <di>debug -></di>{{ response.WordIN__c}}
     <h1>Hangman Game</h1>
     <div id="hangman-container">
         <!-- Dibujo del ahorcado -->
@@ -50,7 +53,35 @@
 
 
     <script>
-      const words = ['test', 'test', 'test', 'test'];
+
+    word1 = "{{response}}";
+
+    console.log(word1);
+
+
+ // Decodificar las entidades HTML a caracteres válidos
+ var decodedString = word1.replace(/&#x27;/g, "'");
+
+ const cadenaConComillasDobles = decodedString.replace(/'/g, "\"");
+
+ const cadenaCorregida = cadenaConComillasDobles.replace(/True/g, "true");
+  
+
+
+console.log(cadenaCorregida)
+
+var parsedData = JSON.parse(cadenaCorregida);
+console.log(cadenaCorregida);
+
+const wordINcValues = parsedData.records.map(record => record.WordIN__c);
+
+console.log(wordINcValues);
+
+
+  
+     
+     const words = wordINcValues
+      
 
       let wordToGuess = '';
       let guessedLetters = [];

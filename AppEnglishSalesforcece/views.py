@@ -10,6 +10,8 @@ from requests.auth import HTTPBasicAuth
 import requests
 import json
 
+import random
+
 
 
 # Create your views here.
@@ -20,7 +22,56 @@ def index(request):
 
 
 def game(request):
-    return render(request, 'game.html')
+
+    CONSUMER_KEY = '3MVG99gP.VbJma8UueUneeXfQ6jjTlMjJX1Xsp8k7u.eMJX27iWaltPgaM3oJI5sqGdsJcdj8u6ZZMtGCmgYu'
+    CONSUMER_SECRET= 'E930064C14C5E307B8AD6229F742C184E15D16CA17EBEA0A134E540DC17E3BB3'
+    USERNAME ='riveravegaandres@wise-hawk-b8wjs3.com'
+    PASSWORD ='+pastdostrescuatroX939'
+    DOMAIN = 'https://login.salesforce.com'
+    DOMAIN_NAME = DOMAIN
+    DOMAIN_NAME2='https://wise-hawk-b8wjs3-dev-ed.trailblaze.my.salesforce.com'
+
+    json_data = {
+    'grant_type': 'password',
+    'username': USERNAME,
+    'password': PASSWORD,
+    'client_id': CONSUMER_KEY,
+    'client_secret': CONSUMER_SECRET,
+    'content-type': 'application/json'
+}
+
+
+    
+
+    uri_token_request = DOMAIN_NAME + '/services/oauth2/token'
+    response = requests.post(uri_token_request, data=json_data)
+    
+    access_token = response.json()['access_token']
+    
+
+    url = 'https://wise-hawk-b8wjs3-dev-ed.trailblaze.my.salesforce.com/services/data/v52.0/limits'
+
+    headers = {
+	'Authorization': 'Bearer ' + access_token,
+    'Content-Type': 'application/json'
+     }
+    response1 = requests.get(DOMAIN_NAME2 + '/services/data/v53.0/query/?q=SELECT+WordIN__c+FROM+Diccionario__c limit 10', headers=headers)
+    print(response.json())
+
+    response1 = response1.json()
+
+    records = response1['records']
+
+    print("salida-->" , records)
+
+    if records:
+        random_record = random.choice(records)
+        print("Registro aleatorio seleccionado:")
+        print(random_record)
+
+
+
+    return render(request, 'game.html', {'response': response1})
 
 
 
@@ -59,7 +110,7 @@ def testf1(request):
     headers = {
 	'Authorization': 'Bearer ' + access_token,
     'Content-Type': 'application/json'
-}
+     }
     response1 = requests.get(DOMAIN_NAME2 + '/services/data/v53.0/query/?q=SELECT+Id,CreatedById,Name,WordES__c,WordIN__c+FROM+Diccionario__c limit 10', headers=headers)
     print(response.json())
 
