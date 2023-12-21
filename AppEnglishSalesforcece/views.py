@@ -26,7 +26,7 @@ def game(request):
     CONSUMER_KEY = '3MVG99gP.VbJma8UueUneeXfQ6jjTlMjJX1Xsp8k7u.eMJX27iWaltPgaM3oJI5sqGdsJcdj8u6ZZMtGCmgYu'
     CONSUMER_SECRET= 'E930064C14C5E307B8AD6229F742C184E15D16CA17EBEA0A134E540DC17E3BB3'
     USERNAME ='riveravegaandres@wise-hawk-b8wjs3.com'
-    PASSWORD ='+pastdostrescuatroX939'
+    PASSWORD ='+pastdostrescuatroX9392'
     DOMAIN = 'https://login.salesforce.com'
     DOMAIN_NAME = DOMAIN
     DOMAIN_NAME2='https://wise-hawk-b8wjs3-dev-ed.trailblaze.my.salesforce.com'
@@ -55,7 +55,7 @@ def game(request):
 	'Authorization': 'Bearer ' + access_token,
     'Content-Type': 'application/json'
      }
-    response1 = requests.get(DOMAIN_NAME2 + '/services/data/v53.0/query/?q=SELECT+WordIN__c+FROM+Diccionario__c limit 10', headers=headers)
+    response1 = requests.get(DOMAIN_NAME2 + '/services/data/v53.0/query/?q=SELECT+WordIN__c+FROM+Diccionario__c ORDER BY CreatedDate DESC limit 10', headers=headers)
     print(response.json())
 
     response1 = response1.json()
@@ -82,7 +82,7 @@ def testf1(request):
     CONSUMER_KEY = '3MVG99gP.VbJma8UueUneeXfQ6jjTlMjJX1Xsp8k7u.eMJX27iWaltPgaM3oJI5sqGdsJcdj8u6ZZMtGCmgYu'
     CONSUMER_SECRET= 'E930064C14C5E307B8AD6229F742C184E15D16CA17EBEA0A134E540DC17E3BB3'
     USERNAME ='riveravegaandres@wise-hawk-b8wjs3.com'
-    PASSWORD ='+pastdostrescuatroX939'
+    PASSWORD ='+pastdostrescuatroX9392'
     DOMAIN = 'https://login.salesforce.com'
     DOMAIN_NAME = DOMAIN
     DOMAIN_NAME2='https://wise-hawk-b8wjs3-dev-ed.trailblaze.my.salesforce.com'
@@ -111,7 +111,7 @@ def testf1(request):
 	'Authorization': 'Bearer ' + access_token,
     'Content-Type': 'application/json'
      }
-    response1 = requests.get(DOMAIN_NAME2 + '/services/data/v53.0/query/?q=SELECT+Id,CreatedById,Name,WordES__c,WordIN__c+FROM+Diccionario__c limit 10', headers=headers)
+    response1 = requests.get(DOMAIN_NAME2 + '/services/data/v53.0/query/?q=SELECT+Id,CreatedById,Name,WordES__c,WordIN__c+FROM+Diccionario__c ORDER BY CreatedDate DESC limit 10', headers=headers)
     print(response.json())
 
     response1 = response1.json()

@@ -11,6 +11,7 @@
     <div id="hangman-container">
         <!-- Dibujo del ahorcado -->
     </div>
+    
     <div id="word-container">
         <!-- Espacios para las letras de la palabra a adivinar -->
     </div>
@@ -45,6 +46,8 @@
         <button class="letter-btn" onclick="handleGuess('X')">X</button>
         <button class="letter-btn" onclick="handleGuess('Y')">Y</button>
         <button class="letter-btn" onclick="handleGuess('Z')">Z</button>
+        <button class="letter-btn" onclick="handleGuess(' ')"> </button>
+        <button class="letter-btn" onclick="handleGuess('-')">-</button>
        
     </div>
     <div id="attempts-container">
@@ -179,6 +182,59 @@ console.log(wordINcValues);
           startGame();
       });
   </script>
+
+
+
+
+
+
+
+
+
+<!-- Tu script existente -->
+
+<div class="image-container">
+    <img src="" alt="Imagen de Unsplash" width="128" height="128">
+</div>
+<button id="ejecutarBoton">Plz Give Me A Clue</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const accessKey = "HrnwGgWL7tLP0a_NwM9wXZefsR97p57nI78JQBbjgh8"; // Reemplaza con tu clave de API de Unsplash
+        const imageElements = document.querySelectorAll(".image-container img");
+
+        // Función que se ejecutará al hacer clic en el botón
+        function ejecutarScript() {
+            // Recorre cada imagen y obtén la imagen de referencia
+            imageElements.forEach((imageElement) => {
+                // Establece el término de búsqueda como "perro"
+                const searchQuery = wordToGuess; // Puedes cambiar esto según tus necesidades
+
+                // Realiza la solicitud a la API de Unsplash
+                fetch(`https://api.unsplash.com/search/photos?query=${searchQuery}&client_id=${accessKey}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // Obtiene la URL de la primera imagen de los resultados
+                        const imageUrl = data.results[0].urls.regular;
+                        imageElement.src = imageUrl;
+                    })
+                    .catch((error) => {
+                        console.error("Error al obtener la imagen de referencia:", error);
+                    });
+            });
+        }
+
+        // Agrega un event listener al botón
+        const boton = document.getElementById("ejecutarBoton");
+        boton.addEventListener("click", ejecutarScript);
+    });
+</script>
+
+
+
+
+
+
 
 
 </body>

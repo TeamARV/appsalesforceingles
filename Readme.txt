@@ -1,4 +1,4 @@
-    1 Copia tu proyecto completo, incluyendo el archivo requirements.txt, en una carpeta nueva en la PC de destino.
+   1 Copia tu proyecto completo, incluyendo el archivo requirements.txt, en una carpeta nueva en la PC de destino.
 
     2 Instala Python y pip en la PC de destino. Puedes descargar Python desde la página oficial de Python
     (https://www.python.org/downloads/) y pip se instala automáticamente junto con Python.
@@ -35,3 +35,8 @@ devmode
 vstudio
 complementos python
 complementos material icon
+
+riveravegaandres@wise-hawk-b8wjs3.com
+
++pastdostrescuatroX939
++pastdostrescuatroX9392
